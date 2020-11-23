@@ -1,65 +1,41 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { Layout } from '../components/layout'
+import { Section } from '../components/section'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+    <Layout>
+      <Section>
+        <h1 className="text-2xl font-bold text-gray-800 text-center">
+          Sticks LOGO          
         </h1>
+      </Section>
+      <Section>
+      <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GlrxcuEDyF8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <button>Reserva ya</button>
+      </Section>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+      <Section>
+        <p>Algo de contenido de texto para que la gente entienda de que va esto</p>
+      </Section>
+      <Section><button>RESERVA YA</button></Section>
+      <Section>
+        <form>
+        <label htmlFor="postalCodeInput">Introduce tu Código Postal</label>
+          <input type="text" id="postalCodeInput" placeholder />
+          <button type="submit">Comprobar</button>
+        </form>
+      </Section>
+    </Layout>
+  );
 }
+
+/**
+ * fetch("https://serve.onegraph.com/graphql?app_id=a40d4864-02f1-4b13-ad59-9c6763dc3c7b", {
+  body: "{\"doc_id\": \"0f21d948-a231-479e-865f-2899eae28dcf\", \"variables\": {\"id\": \"1JWIQP_ZG-Thc81vCRGLXncqVJ5EmmAnp24kkGWzCv58\", \"ranges\": \"a1:a300\"} }",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  method: "POST"
+})
+ */

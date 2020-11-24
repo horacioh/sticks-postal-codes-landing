@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Layout } from "../components/layout"
 import { Section } from "../components/section"
 import { useQuery } from "react-query"
@@ -8,6 +8,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function Home() {
   const [query, setQuery] = useState(null)
   const [canQuery, setCanQuery] = useState(true)
+  const form = useRef(null)
   const { data, isSuccess, isFetching } = useQuery(
     ["PostalCode", query],
     async (key, query) => {
@@ -24,8 +25,8 @@ export default function Home() {
 
   async function onSubmit(event) {
     event.preventDefault()
-
-    setQuery("0801sad3")
+    const formData = new FormData(form.current)
+    setQuery(formData.get("postalcode"))
     if (isSuccess) {
       setQuery(null)
     }
@@ -46,12 +47,33 @@ export default function Home() {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <button
-          className="block my-6 mx-auto px-8 py-4 bg-blue-700 text-white font-bold rounded w-48"
-          onClick={onSubmit}
-        >
-          {isFetching ? "..." : "Reserva ya"}
-        </button>
+        <div className="p-8 text-center">
+          <form ref={form}>
+            <div>
+              <label className="block" htmlFor="postalcode">
+                Tu Codigo postal
+              </label>
+              <input
+                className="block px-4 py-2 border rounded w-full text-center"
+                id="postalcode"
+                name="postalcode"
+                type="text"
+                placeholder="08012"
+              />
+            </div>
+            <button
+              className="block my-6 mx-auto px-8 py-4 bg-blue-700 text-white font-bold rounded w-48"
+              onClick={onSubmit}
+            >
+              {isFetching ? "..." : "Reserva ya"}
+            </button>
+            {data
+              ? data.input
+                ? "si esta permitido!"
+                : "no esta permitido :("
+              : null}
+          </form>
+        </div>
       </Section>
 
       <Section>

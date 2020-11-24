@@ -1,33 +1,81 @@
-import Head from 'next/head'
-import { Layout } from '../components/layout'
-import { Section } from '../components/section'
+import { useEffect, useState } from "react"
+import { Layout } from "../components/layout"
+import { Section } from "../components/section"
+import { useQuery } from "react-query"
+
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
+  const [query, setQuery] = useState(null)
+  const [canQuery, setCanQuery] = useState(true)
+  const { data, isSuccess, isFetching } = useQuery(
+    ["PostalCode", query],
+    async (key, query) => {
+      const res = await fetcher(`/api/postalcodes/${query}`)
+      console.log("🚀 ~ file: index.js ~ line 14 ~ res", res)
+      return res
+    },
+    {
+      enabled: canQuery && query,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    }
+  )
+
+  async function onSubmit(event) {
+    event.preventDefault()
+
+    setQuery("0801sad3")
+    if (isSuccess) {
+      setQuery(null)
+    }
+  }
   return (
     <Layout>
       <Section>
         <h1 className="text-2xl font-bold text-gray-800 text-center">
-          Sticks LOGO          
+          Sticks LOGO
         </h1>
       </Section>
       <Section>
-      <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GlrxcuEDyF8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <button>Reserva ya</button>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube-nocookie.com/embed/GlrxcuEDyF8"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+        <button
+          className="block my-6 mx-auto px-8 py-4 bg-blue-700 text-white font-bold rounded w-48"
+          onClick={onSubmit}
+        >
+          {isFetching ? "..." : "Reserva ya"}
+        </button>
       </Section>
 
       <Section>
-        <p>Algo de contenido de texto para que la gente entienda de que va esto</p>
+        <p>
+          Algo de contenido de texto para que la gente entienda de que va esto
+        </p>
       </Section>
-      <Section><button>RESERVA YA</button></Section>
+      <Section>
+        <button
+          className="block my-6 mx-auto px-8 py-4 bg-blue-700 text-white font-bold rounded w-48"
+          onClick={onSubmit}
+        >
+          {isFetching ? "..." : "Reserva ya"}
+        </button>
+      </Section>
       <Section>
         <form>
-        <label htmlFor="postalCodeInput">Introduce tu Código Postal</label>
-          <input type="text" id="postalCodeInput" placeholder />
+          <label htmlFor="postalCodeInput">Introduce tu Código Postal</label>
+          <input type="text" id="postalCodeInput" placeholder="08001" />
           <button type="submit">Comprobar</button>
         </form>
       </Section>
     </Layout>
-  );
+  )
 }
 
 /**

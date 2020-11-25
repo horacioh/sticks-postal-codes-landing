@@ -23,10 +23,6 @@ export default async function handler(req, res) {
     })
 
   const isAvailable = list.filter((code) => code === req.body.input)
-  console.log(
-    "🚀 ~ file: postalcodes.js ~ line 27 ~ handler ~ isAvailable",
-    isAvailable
-  )
 
   res.status(200).json({ input: isAvailable.length ? isAvailable[0] : null })
 }

@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useMutation } from "react-query"
 import { useState, useRef } from "react"
 
@@ -57,28 +58,33 @@ export function PostalCodeForm() {
         <div>
           {data ? (
             data.input ? (
-              <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-                <a
-                  className="px-4 py-2 border border-blue-700 text-blue-700 rounded"
-                  href="https://calendly.com/hi-sticks/15min"
-                  target="_blank"
-                >
-                  Reserva para 2
-                </a>
-                <a
-                  className="px-4 py-2 border border-blue-700 text-blue-700 rounded"
-                  href="https://calendly.com/hi-sticks/15min"
-                  target="_blank"
-                >
-                  Reserva para 3
-                </a>
-                <a
-                  className="px-4 py-2 border border-blue-700 text-blue-700 rounded"
-                  href="https://calendly.com/hi-sticks/15min"
-                  target="_blank"
-                >
-                  Reserva para 4
-                </a>
+              <div>
+                <div className="p-4 rounded border-green-300 border bg-green-200">
+                  <h3 className="text-xl font-bold">
+                    Podemos ir a tu casa! 🎉
+                  </h3>
+                  <p>
+                    Ahora escoge cuantas personas disfrutar&aacute;n de Sushi
+                    Sticks:
+                  </p>
+                </div>
+                <div className="pt-8 flex flex-col md:flex-row items-center justify-center gap-4">
+                  <Link href="/reservas/para-dos">
+                    <a className="px-4 py-2 border border-blue-700 text-blue-700 rounded">
+                      Para 2
+                    </a>
+                  </Link>
+                  <Link href="/reservas/para-tres">
+                    <a className="px-4 py-2 border border-blue-700 text-blue-700 rounded">
+                      Para 3
+                    </a>
+                  </Link>
+                  <Link href="/reservas/para-cuatro">
+                    <a className="px-4 py-2 border border-blue-700 text-blue-700 rounded">
+                      Para 4
+                    </a>
+                  </Link>
+                </div>
               </div>
             ) : (
               "no esta permitido :("

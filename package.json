@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next",
-    "build": "next build",
-    "postbuild": "next-on-netlify"
+    "build": "next build"
   },
   "dependencies": {
     "autoprefixer": "^10.0.2",
